@@ -40,7 +40,7 @@ public class ClassesDiagramGenerator {
             PrintWriter printWriter = new PrintWriter(fileWriter);
 
             printWriter.println("@startuml");
-            printWriter.println("class " + className);
+            printWriter.println("\tclass " + className);
             printWriter.println("@enduml");
             printWriter.close();
         } catch (IOException e) {
