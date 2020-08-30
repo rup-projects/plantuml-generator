@@ -8,6 +8,7 @@ import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -19,16 +20,14 @@ public class ClassesDiagramGenerator {
     }
 
     private List<PumlClass> getPumlClassList(List<File> colaborationDiagrams) throws IOException {
-        List<String> classesList = getAllLinesDiagrams(colaborationDiagrams);
-        List<PumlClass> pumlClasses = createPumlClasses(classesList);
+        List<String> allLines = getAllLinesDiagrams(colaborationDiagrams);
+        List<PumlClass> pumlClasses = createPumlClasses(allLines);
 
         return pumlClasses;
     }
 
     private List<String> getAllLinesDiagrams(List<File> colaborationDiagrams) throws IOException {
         List<String> allLinesCollaborationDiagrams = new ArrayList<>();
-
-
         for (File diagramFile : colaborationDiagrams) {
             Stream<String> lines = Files.lines(diagramFile.toPath());
             allLinesCollaborationDiagrams.addAll(lines.collect(Collectors.toList()));
@@ -59,8 +58,11 @@ public class ClassesDiagramGenerator {
     }
 
     private static List<PumlClass> createPumlClasses(List<String> lines) {
-        return lines.stream()
+        Set<String> classesList = lines.stream()
                 .filter(s -> s.startsWith("model") || s.startsWith("entity") || s.startsWith("controller"))
+                .collect(Collectors.toSet());
+
+        return classesList.stream()
                 .map(s -> new PumlClass(s.split(" ")[1], s.split(" ")[0]))
                 .collect(Collectors.toList());
     }
