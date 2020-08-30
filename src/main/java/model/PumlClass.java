@@ -39,6 +39,14 @@ public class PumlClass {
     }
 
     public void addRelation(String relation) {
+        relation = relation.replace("-right-", "--");
+        relation = relation.replace("-left-", "--");
+        relation = relation.replace("-up-", "--");
+        relation = relation.replace("-down-", "--");
+        relation = relation.replace(".right.", "..");
+        relation = relation.replace(".left.", "..");
+        relation = relation.replace(".up.", "..");
+        relation = relation.replace(".down.", "..");
         relations.add(relation);
     }
 
