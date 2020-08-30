@@ -62,9 +62,28 @@ public class ClassesDiagramGenerator {
                 .filter(s -> s.startsWith("model") || s.startsWith("entity") || s.startsWith("controller"))
                 .collect(Collectors.toSet());
 
-        return classesList.stream()
+        List<PumlClass> pumlClasses = classesList.stream()
                 .map(s -> new PumlClass(s.split(" ")[1], s.split(" ")[0]))
                 .collect(Collectors.toList());
+
+        pumlClasses.forEach(pumlClass -> addAttributesFrom(lines, pumlClass));
+
+        return pumlClasses;
+    }
+
+    private static void addAttributesFrom(List<String> lines, PumlClass pumlClass) {
+        for (int index = 0; index < lines.size(); index++) {
+            if (lines.get(index).contains("> " + pumlClass.getName())) {
+                index++;
+                if (lines.get(index).contains("note on link")) {
+                    index++;
+                    while (!lines.get(index).contains("end note")) {
+                        pumlClass.addAttribute(lines.get(index));
+                        index++;
+                    }
+                }
+            }
+        }
     }
 
 }

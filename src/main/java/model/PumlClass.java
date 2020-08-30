@@ -1,13 +1,13 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class PumlClass {
     String name;
     String type;
-    List<String> attributes = new ArrayList<>();
-    List<String> relations = new ArrayList<>();
+    Set<String> attributes = new HashSet<>();
+    Set<String> relations = new HashSet<>();
 
     public PumlClass(String name, String type) {
         this.name = name;
@@ -30,11 +30,11 @@ public class PumlClass {
         this.type = type;
     }
 
-    public List<String> getRelations() {
+    public Set<String> getRelations() {
         return relations;
     }
 
-    public void setRelations(List<String> relations) {
+    public void setRelations(Set<String> relations) {
         this.relations = relations;
     }
 
@@ -42,12 +42,15 @@ public class PumlClass {
         relations.add(relation);
     }
 
-    public List<String> getAttributes() {
+    public Set<String> getAttributes() {
         return attributes;
     }
 
     public void addAttribute(String attrubute) {
-        attributes.add(attrubute);
+        if (attrubute.contains("new ")) {
+            return;
+        }
+        attributes.add(attrubute.trim());
     }
 
 }
