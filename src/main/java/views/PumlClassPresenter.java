@@ -11,8 +11,9 @@ public class PumlClassPresenter {
         result.add("@startuml");
         result.add("\tclass " + pumlClass.getName() + " {");
         pumlClass.getAttributes().forEach(attribute -> result.add("\t+" + attribute));
-        pumlClass.getRelations().forEach(relation -> result.add("\t" + relation));
         result.add("\t}");
+        result.add("");
+        pumlClass.getRelations().forEach(relation -> result.add("\t" + relation));
         result.add("@enduml");
         return result;
     }

@@ -1,4 +1,5 @@
 import model.PumlClass;
+import utils.Matchers;
 import views.PumlClassPresenter;
 
 import java.io.File;
@@ -67,13 +68,15 @@ public class ClassesDiagramGenerator {
                 .collect(Collectors.toList());
 
         pumlClasses.forEach(pumlClass -> addAttributesFrom(lines, pumlClass));
+        pumlClasses.forEach(pumlClass -> addRelationsFrom(lines, pumlClass));
 
         return pumlClasses;
     }
 
     private static void addAttributesFrom(List<String> lines, PumlClass pumlClass) {
         for (int index = 0; index < lines.size(); index++) {
-            if (lines.get(index).contains("> " + pumlClass.getName())) {
+            if (lines.get(index).endsWith("> " + pumlClass.getName())) {
+                pumlClass.addRelation(lines.get(index));
                 index++;
                 if (lines.get(index).contains("note on link")) {
                     index++;
@@ -82,6 +85,14 @@ public class ClassesDiagramGenerator {
                         index++;
                     }
                 }
+            }
+        }
+    }
+
+    private static void addRelationsFrom(List<String> lines, PumlClass pumlClass) {
+        for (int index = 0; index < lines.size(); index++) {
+            if (Matchers.isRelation(pumlClass.getName(), lines.get(index))) {
+                pumlClass.addRelation(lines.get(index));
             }
         }
     }
