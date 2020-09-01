@@ -1,0 +1,16 @@
+@startuml
+
+class GenerationView
+class CollaborationToClassDiagramGeneration
+class Diagram
+class PlantUmlClass
+class PlantUmlClassDao
+
+GenerationView --> CollaborationToClassDiagramGeneration
+CollaborationToClassDiagramGeneration --> PlantUmlClassDao
+CollaborationToClassDiagramGeneration ..> PlantUmlClass
+
+PlantUmlClassDao ..> PlantUmlClass
+GenerationView ..> PlantUmlClass
+
+@enduml

@@ -1,0 +1,12 @@
+@startuml
+scale 350 width
+[*] --> RequestGeneration : User request to generate class diagrams
+
+RequestGeneration --> AskForCollaborationDiagrams : System require which collaboration diagrams to convert
+AskForCollaborationDiagrams --> ProvideCollaborationDiagrams : User provides the collaboration diagrams directory
+ProvideCollaborationDiagrams --> SystemGenerateClassDiagrams : System generate the class diagrams
+
+SystemGenerateClassDiagrams --> [*]
+
+
+@enduml

@@ -1,0 +1,27 @@
+@startuml
+!include definitions.puml
+
+actor user
+
+view GenerationView
+controller CollaborationToClassDiagramGeneration
+model PlantUmlClassDao
+model PlantUmlClass
+model Diagram
+
+user -right-> GenerationView
+    note on link
+        generateFromDirectory(path)
+    end note
+GenerationView --> CollaborationToClassDiagramGeneration
+    note on link
+        generateFromDirectory(path)
+    end note
+CollaborationToClassDiagramGeneration -right-> PlantUmlClassDao
+    note on link
+        save(plantUmlClass[])
+    end note
+PlantUmlClassDao .down.> PlantUmlClass
+CollaborationToClassDiagramGeneration ..> PlantUmlClass
+
+@enduml

@@ -1,0 +1,18 @@
+@startuml
+
+class Diagram {
+    - name
+    - type
+    - file
+}
+
+class PlantUmlClass {
+    - name
+    - type
+    - relations []
+    - attributes []
+}
+
+Diagram *--> PlantUmlClass
+
+@enduml
