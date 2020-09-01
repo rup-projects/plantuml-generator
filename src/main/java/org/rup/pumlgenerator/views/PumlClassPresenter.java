@@ -1,6 +1,6 @@
-package views;
+package org.rup.pumlgenerator.views;
 
-import model.PumlClass;
+import org.rup.pumlgenerator.model.PumlClass;
 
 import java.util.ArrayList;
 import java.util.List;

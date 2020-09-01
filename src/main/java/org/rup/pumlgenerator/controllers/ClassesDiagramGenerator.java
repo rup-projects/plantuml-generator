@@ -1,6 +1,8 @@
-import model.PumlClass;
-import utils.Matchers;
-import views.PumlClassPresenter;
+package org.rup.pumlgenerator.controllers;
+
+import org.rup.pumlgenerator.model.PumlClass;
+import org.rup.pumlgenerator.utils.Matchers;
+import org.rup.pumlgenerator.views.PumlClassPresenter;
 
 import java.io.File;
 import java.io.FileWriter;

@@ -1,3 +1,5 @@
+import org.rup.pumlgenerator.controllers.ClassesDiagramGenerator;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
@@ -12,8 +14,7 @@ public class PlantUmlGenerator {
     }
 
     private static String getColaborationDiagramsDirectory() {
-        return "/media/pedro/data-projects/personal-workspace/rup-projects/documentation/analysisview/usecaseanalysis"
-                + "/collaborationdiagrams/projectmanagement";
+        return "/media/pedro/data-projects/personal-workspace/rup-projects/documentation/analysisview/usecaseanalysis/collaborationdiagrams/projectmanagement";
     }
 }
 

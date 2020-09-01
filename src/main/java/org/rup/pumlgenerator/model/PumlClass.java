@@ -1,4 +1,4 @@
-package model;
+package org.rup.pumlgenerator.model;
 
 import java.util.HashSet;
 import java.util.Set;

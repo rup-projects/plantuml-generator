@@ -1,4 +1,4 @@
-package utils;
+package org.rup.pumlgenerator.utils;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

@@ -1,4 +1,4 @@
-package utils;
+package org.rup.pumlgenerator.utils;
 
 import org.junit.jupiter.api.Test;
 
