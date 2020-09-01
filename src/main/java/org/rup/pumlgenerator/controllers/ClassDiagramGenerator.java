@@ -1,25 +1,43 @@
 package org.rup.pumlgenerator.controllers;
 
+import lombok.RequiredArgsConstructor;
+import org.rup.pumlgenerator.daos.PumlClassDao;
 import org.rup.pumlgenerator.model.PumlClass;
 import org.rup.pumlgenerator.utils.Matchers;
 import org.rup.pumlgenerator.views.PumlClassPresenter;
+import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class ClassesDiagramGenerator {
+@Component
+@RequiredArgsConstructor
+public class ClassDiagramGenerator implements DiagramGenerator {
+
+    private final PumlClassDao pumlClassDao;
+    private final FileUtilsFacade fileUtilsFacade;
+    private final PumlClassInterpreter pumlClassInterpreter;
+
+    @Override
+    public void generateFromDirectory(Path path) {
+        List<File> files = fileUtilsFacade.readFilesFromDirectory(path);
+        String sourceCode = fileUtilsFacade.convertFilesToString(files);
+        List<PumlClass> pumlClassList = pumlClassInterpreter.interpret(sourceCode);
+        pumlClassDao.save(pumlClassList);
+    }
 
     public void generate(List<File> colaborationDiagrams) throws IOException {
         List<PumlClass> classesList = getPumlClassList(colaborationDiagrams);
-        classesList.forEach(ClassesDiagramGenerator::createFileDiagramFor);
+        classesList.forEach(ClassDiagramGenerator::createFileDiagramFor);
     }
 
     private List<PumlClass> getPumlClassList(List<File> colaborationDiagrams) throws IOException {
@@ -98,5 +116,4 @@ public class ClassesDiagramGenerator {
             }
         }
     }
-
 }

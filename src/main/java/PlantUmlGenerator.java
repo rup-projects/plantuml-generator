@@ -1,4 +1,4 @@
-import org.rup.pumlgenerator.controllers.ClassesDiagramGenerator;
+import org.rup.pumlgenerator.controllers.ClassDiagramGenerator;
 
 import java.io.File;
 import java.io.IOException;
@@ -7,10 +7,7 @@ import java.util.stream.Collectors;
 
 public class PlantUmlGenerator {
     public static void main(String args[]) throws IOException {
-        File colaborationDiagramsDirectory = new File(getColaborationDiagramsDirectory());
-        File[] colaborationDiagrams = colaborationDiagramsDirectory.listFiles();
 
-        new ClassesDiagramGenerator().generate(Arrays.stream(colaborationDiagrams).collect(Collectors.toList()));
     }
 
     private static String getColaborationDiagramsDirectory() {
