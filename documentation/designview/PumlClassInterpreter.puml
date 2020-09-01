@@ -1,0 +1,16 @@
+@startuml
+
+interface PumlClassInterpreter
+
+class GeneralInterpreter implements PumlClassInterpreter
+class ClassExtractor implements PumlClassInterpreter
+class RelationsExtractor implements PumlClassInterpreter
+class AttributesExtractor implements PumlClassInterpreter
+
+GeneralInterpreter *-down-> PumlClassInterpreter
+
+GeneralInterpreter ..> ClassExtractor
+GeneralInterpreter ..> RelationsExtractor
+GeneralInterpreter ..> AttributesExtractor
+
+@enduml

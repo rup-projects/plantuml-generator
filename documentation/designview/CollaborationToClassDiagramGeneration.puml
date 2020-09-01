@@ -1,0 +1,24 @@
+@startuml
+
+!include definitions.puml
+
+controller CollaborationToClassDiagramGeneration
+controller FileUtilsFacade
+controller PumlClassInterpreter
+
+dao PumlClassDao
+
+CollaborationToClassDiagramGeneration --> FileUtilsFacade
+    note on link
+        readFilesFromDirectory(Path directory) : List<File>
+        convertFilesToString(List<File> files) : String
+    end note
+CollaborationToClassDiagramGeneration --> PumlClassInterpreter
+    note on link
+        interpret(String context) : List<PumlClass>
+    end note
+CollaborationToClassDiagramGeneration --> PumlClassDao
+    note on link
+        void save(List<PumlClass>)
+    end note
+@enduml
