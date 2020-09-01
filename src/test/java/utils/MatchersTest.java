@@ -1,7 +1,8 @@
 package utils;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 
 public class MatchersTest {
@@ -16,7 +17,7 @@ public class MatchersTest {
         boolean result = Matchers.isRelation(className, line);
 
         // Asserts
-        Assert.assertTrue(result);
+        assertThat(result).isTrue();
     }
 
     @Test
@@ -29,6 +30,6 @@ public class MatchersTest {
         boolean result = Matchers.isRelation(className, line);
 
         // Asserts
-        Assert.assertFalse(result);
+        assertThat(result).isFalse();
     }
 }
