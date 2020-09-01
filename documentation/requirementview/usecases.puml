@@ -1,5 +1,5 @@
 @startuml
 
-User --> (CollaborationToClassDiagramGeneration)
+User --> (ClassDiagramGenerator)
 
 @enduml

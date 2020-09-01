@@ -2,22 +2,22 @@
 
 !include definitions.puml
 
-controller CollaborationToClassDiagramGeneration
+controller ClassDiagramGenerator
 controller FileUtilsFacade
 controller PumlClassInterpreter
 
 dao PumlClassDao
 
-CollaborationToClassDiagramGeneration --> FileUtilsFacade
+ClassDiagramGenerator --> FileUtilsFacade
     note on link
         readFilesFromDirectory(Path directory) : List<File>
         convertFilesToString(List<File> files) : String
     end note
-CollaborationToClassDiagramGeneration --> PumlClassInterpreter
+ClassDiagramGenerator --> PumlClassInterpreter
     note on link
         interpret(String context) : List<PumlClass>
     end note
-CollaborationToClassDiagramGeneration --> PumlClassDao
+ClassDiagramGenerator --> PumlClassDao
     note on link
         void save(List<PumlClass>)
     end note

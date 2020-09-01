@@ -1,14 +1,14 @@
 @startuml
 
 class GenerationView
-class CollaborationToClassDiagramGeneration
+class ClassDiagramGenerator
 class Diagram
 class PlantUmlClass
 class PlantUmlClassDao
 
-GenerationView --> CollaborationToClassDiagramGeneration
-CollaborationToClassDiagramGeneration --> PlantUmlClassDao
-CollaborationToClassDiagramGeneration ..> PlantUmlClass
+GenerationView --> ClassDiagramGenerator
+ClassDiagramGenerator --> PlantUmlClassDao
+ClassDiagramGenerator ..> PlantUmlClass
 
 PlantUmlClassDao ..> PlantUmlClass
 GenerationView ..> PlantUmlClass

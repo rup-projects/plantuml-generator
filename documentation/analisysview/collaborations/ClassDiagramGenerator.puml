@@ -4,7 +4,7 @@
 actor user
 
 view GenerationView
-controller CollaborationToClassDiagramGeneration
+controller ClassDiagramGenerator
 model PlantUmlClassDao
 model PlantUmlClass
 model Diagram
@@ -13,15 +13,15 @@ user -right-> GenerationView
     note on link
         generateFromDirectory(path)
     end note
-GenerationView --> CollaborationToClassDiagramGeneration
+GenerationView --> ClassDiagramGenerator
     note on link
         generateFromDirectory(path)
     end note
-CollaborationToClassDiagramGeneration -right-> PlantUmlClassDao
+ClassDiagramGenerator -right-> PlantUmlClassDao
     note on link
         save(plantUmlClass[])
     end note
 PlantUmlClassDao .down.> PlantUmlClass
-CollaborationToClassDiagramGeneration ..> PlantUmlClass
+ClassDiagramGenerator ..> PlantUmlClass
 
 @enduml
