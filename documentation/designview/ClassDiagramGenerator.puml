@@ -1,10 +1,8 @@
 @startuml
 
-!include definitions.puml
-
 controller ClassDiagramGenerator
 controller FileUtilsFacade
-controller PumlClassInterpreter
+controller PumlClassInterpreter [[file:///PumlClassInterpreter.puml]]
 
 dao PumlClassDao
 

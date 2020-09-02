@@ -1,6 +1,4 @@
 @startuml
-!include definitions.puml
-
 actor user
 
 view GenerationView
