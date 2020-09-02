@@ -13,7 +13,7 @@ public class GeneralInterpreter implements PumlClassInterpreter {
     @Override
     public List<PumlClass> interpret(List<String> context) {
         Set<String> classesList = context.stream()
-                .filter(s -> s.startsWith("model") || s.startsWith("entity") || s.startsWith("controller"))
+                .filter(s -> s.startsWith("model") || s.startsWith("view") || s.startsWith("controller"))
                 .collect(Collectors.toSet());
 
         List<PumlClass> pumlClasses = classesList.stream()
@@ -43,9 +43,9 @@ public class GeneralInterpreter implements PumlClassInterpreter {
     }
 
     private static void addRelationsFrom(List<String> lines, PumlClass pumlClass) {
-        for (int index = 0; index < lines.size(); index++) {
-            if (Matchers.isRelation(pumlClass.getName(), lines.get(index))) {
-                pumlClass.addRelation(lines.get(index));
+        for (String line : lines) {
+            if (Matchers.isRelation(pumlClass.getName(), line)) {
+                pumlClass.addRelation(line);
             }
         }
     }
