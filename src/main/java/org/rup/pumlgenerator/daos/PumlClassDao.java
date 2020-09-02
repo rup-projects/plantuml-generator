@@ -22,26 +22,23 @@ public class PumlClassDao {
     private void createFileDiagramFor(PumlClass pumlClass) {
         try {
             File newFile = new File(pumlClass.getName() + ".puml");
+            boolean success = false;
             if (newFile.exists()) {
-                log.info("Already exitst: " + newFile.getName());
+                System.out.println("Already exitst: " + newFile.getName());
                 return;
             } else {
-                boolean isCreated = newFile.createNewFile();
-                if (!isCreated) {
-                    log.error("File cannot be created: " + newFile.getName());
-                }
+                success = newFile.createNewFile();
             }
             List<String> presentation = new PumlClassPresenter().present(pumlClass);
-            PrintWriter printWriter;
-            try (FileWriter fileWriter = new FileWriter(newFile)) {
-                printWriter = new PrintWriter(fileWriter);
-            }
+            FileWriter fileWriter = new FileWriter(newFile);
+            PrintWriter printWriter = new PrintWriter(fileWriter);
 
-            presentation.forEach(printWriter::println);
+            presentation.forEach(line -> printWriter.println(line));
 
             printWriter.close();
         } catch (IOException e) {
-            log.error("Error generating file for: " + pumlClass, e);
+            System.out.println("Error generating file for: " + pumlClass);
         }
     }
+
 }
