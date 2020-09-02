@@ -2,7 +2,8 @@ package org.rup.pumlgenerator.views;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.rup.pumlgenerator.controllers.ClassDiagramGeneratorService;
+import org.rup.pumlgenerator.controllers.DiagramGenerator;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -14,7 +15,8 @@ import java.nio.file.Paths;
 @Log4j2
 public class GenerationView {
 
-    private final ClassDiagramGeneratorService classDiagramGeneratorService;
+    @Qualifier("ClassDiagramGeneratorService")
+    private final DiagramGenerator classDiagramGeneratorService;
 
     public void generateFromDirectory(String[] commandLineArgs) {
         Path path = Paths.get(commandLineArgs[0]);
