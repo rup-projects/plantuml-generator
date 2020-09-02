@@ -1,6 +1,7 @@
 package org.rup.pumlgenerator.controllers;
 
 import lombok.RequiredArgsConstructor;
+import org.rup.pumlgenerator.controllers.pumlinterpreter.PumlClassContext;
 import org.rup.pumlgenerator.controllers.pumlinterpreter.PumlClassInterpreter;
 import org.rup.pumlgenerator.daos.PumlClassDao;
 import org.rup.pumlgenerator.model.PumlClass;
@@ -23,7 +24,7 @@ public class ClassDiagramGeneratorService implements DiagramGenerator {
     public void generateFromDirectory(Path path) throws IOException {
         List<File> files = fileUtilsFacade.readFilesFromDirectory(path);
         List<String> sourceCode = fileUtilsFacade.convertFilesToString(files);
-        List<PumlClass> pumlClassList = pumlClassInterpreter.interpret(sourceCode);
+        List<PumlClass> pumlClassList = pumlClassInterpreter.interpret(new PumlClassContext(sourceCode));
         pumlClassDao.save(pumlClassList);
     }
 

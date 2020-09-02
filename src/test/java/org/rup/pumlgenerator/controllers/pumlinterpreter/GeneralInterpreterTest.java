@@ -15,10 +15,10 @@ class GeneralInterpreterTest {
     @Test
     void interpretTest_havingEmptySourceCodeList_whenInterpret_thenGetEmptyListResult() {
         // Arrangement
-        List<String> emptyList = Collections.emptyList();
+        PumlClassContext pumlClassContext = new PumlClassContext(Collections.emptyList());
 
         // Actions
-        List<PumlClass> result = new GeneralInterpreter().interpret(emptyList);
+        List<PumlClass> result = new GeneralInterpreter().interpret(pumlClassContext);
 
         // Asserts
         assertThat(result).isEmpty();
@@ -27,14 +27,14 @@ class GeneralInterpreterTest {
     @Test
     void interpretTest_havingOneDeclaredClassForEachType_whenInterpret_thenGetAllTheClasses() {
         // Arrangement
-        List<String> emptyList = Stream.of(
+        PumlClassContext context = new PumlClassContext(Stream.of(
                 "controller ControllerClass",
                 "view ViewClass",
                 "model EntityClass"
-        ).collect(Collectors.toList());
+        ).collect(Collectors.toList()));
 
         // Actions
-        List<PumlClass> result = new GeneralInterpreter().interpret(emptyList);
+        List<PumlClass> result = new GeneralInterpreter().interpret(context);
 
         // Asserts
         assertThat(result).hasSize(3);
@@ -43,17 +43,17 @@ class GeneralInterpreterTest {
     @Test
     void interpretTest_havingOneClassLinesWithAttributesAndReferences_whenInterpret_thenClassWithAllAttributesAndReferences() {
         // Arrangement
-        List<String> emptyList = Stream.of(
+        PumlClassContext context = new PumlClassContext(Stream.of(
                 "controller ExampleClass",
                 "ReferenceLeft --> ExampleClass",
                 "note on link",
                 "operation()",
                 "end note",
                 "ExampleClass --> ReferenceRight"
-        ).collect(Collectors.toList());
+        ).collect(Collectors.toList()));
 
         // Actions
-        PumlClass result = new GeneralInterpreter().interpret(emptyList).get(0);
+        PumlClass result = new GeneralInterpreter().interpret(context).get(0);
 
         // Asserts
         assertThat(result.getName()).isEqualTo("ExampleClass");
