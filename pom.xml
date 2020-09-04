@@ -8,10 +8,10 @@
 		<version>2.3.3.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>org.rup</groupId>
-	<artifactId>pumlgenerator</artifactId>
+	<groupId>org.rupprojects</groupId>
+	<artifactId>plantuml-generator</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>pumlgenerator</name>
+	<name>plantuml-generator</name>
 	<description>plant uml generator</description>
 
 	<properties>
@@ -22,7 +22,7 @@
 		<repository>
 			<id>github</id>
 			<name>GitHub OWNER Apache Maven Packages</name>
-			<url>https://maven.pkg.github.com/rup-projects/rup-projects</url>
+			<url>https://maven.pkg.github.com/rup-projects/plantuml-generator</url>
 		</repository>
 	</distributionManagement>
 
