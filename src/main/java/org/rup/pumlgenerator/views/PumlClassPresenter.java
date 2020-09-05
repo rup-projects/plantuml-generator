@@ -17,4 +17,8 @@ public class PumlClassPresenter {
         result.add("@enduml");
         return result;
     }
+
+    public String presentAsString(PumlClass pumlClass) {
+        return String.join(System.lineSeparator(), present(pumlClass));
+    }
 }

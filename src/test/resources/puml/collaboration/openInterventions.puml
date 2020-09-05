@@ -1,0 +1,64 @@
+@startuml
+
+!include configuration/skinParams.puml
+!include configuration/definitions.puml
+
+actor user
+
+view MenuView
+view InterventionsView
+
+controller OpenInterventionsController
+
+model InterventionDao
+model Intervention
+model VehicleDao
+model Vehicle
+model MechanicDao
+model Mechanic
+
+
+user --> MenuView
+note on link
+    openInterventions()
+end note
+
+MenuView -right-> InterventionsView
+note on link
+    openInterventionsView()
+end note
+
+InterventionsView -right-> OpenInterventionsController
+note on link
+    readMechanics()
+    readInterventions(mechanicId)
+    readVehicle(vehicleId)
+end note
+
+OpenInterventionsController --> InterventionDao
+note on link
+    readInterventions(mechanicId)
+end note
+
+OpenInterventionsController --> VehicleDao
+note on link
+    readVehicle(vehicleId)
+end note
+
+OpenInterventionsController --> MechanicDao
+note on link
+    readMechanics()
+end note
+
+InterventionsView --> Intervention
+InterventionsView --> Vehicle
+InterventionsView --> Mechanic
+
+OpenInterventionsController .. "0..*" Intervention
+OpenInterventionsController ..... "1" Vehicle
+OpenInterventionsController .... "0..*" Mechanic
+InterventionDao .. Intervention
+VehicleDao .. Vehicle
+MechanicDao .. Mechanic
+
+@enduml

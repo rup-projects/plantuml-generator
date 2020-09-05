@@ -25,7 +25,6 @@ public class ClassDiagramGeneratorService implements DiagramGenerator {
         List<File> files = fileUtilsFacade.readFilesFromDirectory(path);
         List<String> sourceCode = fileUtilsFacade.convertFilesToString(files);
         List<PumlClass> pumlClassList = pumlClassInterpreter.interpret(new PumlClassContext(sourceCode));
-        pumlClassDao.save(pumlClassList);
+        pumlClassList.forEach(pumlClassDao::save);
     }
-
 }

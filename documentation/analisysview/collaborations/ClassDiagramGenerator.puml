@@ -1,6 +1,8 @@
 @startuml
 actor user
 
+!include definitions.puml
+
 view GenerationView
 controller ClassDiagramGenerator
 model PlantUmlClassDao
