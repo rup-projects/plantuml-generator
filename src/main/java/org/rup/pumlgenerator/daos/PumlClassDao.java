@@ -5,40 +5,30 @@ import org.rup.pumlgenerator.model.PumlClass;
 import org.rup.pumlgenerator.views.PumlClassPresenter;
 import org.springframework.stereotype.Component;
 
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.List;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 
 @Component
 @Log4j2
 public class PumlClassDao {
 
-    public void save(List<PumlClass> pumlClassList) {
-        pumlClassList.forEach(this::createFileDiagramFor);
+    public void save(PumlClass pumlClass) {
+        createFileDiagramFor(pumlClass);
     }
 
     private void createFileDiagramFor(PumlClass pumlClass) {
         try {
-            File newFile = new File(pumlClass.getName() + ".puml");
-            boolean success = false;
-            if (newFile.exists()) {
-                System.out.println("Already exitst: " + newFile.getName());
+            String presentation = new PumlClassPresenter().presentAsString(pumlClass);
+            Path outputPath = Path.of(String.format("%s.puml", pumlClass.getName()));
+            if (Files.exists(outputPath)) {
                 return;
-            } else {
-                success = newFile.createNewFile();
             }
-            List<String> presentation = new PumlClassPresenter().present(pumlClass);
-            FileWriter fileWriter = new FileWriter(newFile);
-            PrintWriter printWriter = new PrintWriter(fileWriter);
-
-            presentation.forEach(line -> printWriter.println(line));
-
-            printWriter.close();
+            Files.writeString(outputPath, presentation, StandardCharsets.UTF_8, StandardOpenOption.CREATE);
         } catch (IOException e) {
             System.out.println("Error generating file for: " + pumlClass);
         }
     }
-
 }
